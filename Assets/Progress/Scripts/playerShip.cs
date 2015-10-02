@@ -50,7 +50,7 @@ public class playerShip : MonoBehaviour {
         //Player Attack
         if (Input.GetKey(KeyCode.Space))
         {
-            //Spawn projectile
+            
             
         }
         
