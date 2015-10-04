@@ -3,8 +3,6 @@ using System.Collections;
 
 public class backgroundControl : MonoBehaviour {
 
-    //public float scrollPosition;
-
     // Use this for initialization
 	void Start () {
 
@@ -13,37 +11,22 @@ public class backgroundControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        /*//Reset position of scrolling background plate
-        scrollPosition = transform.position.z;
-
-        if (transform.position.z >= 10f)
-        {
-            scrollPosition = -10f;  
-        }*/
-
         //basic background movements
-        transform.Translate(Vector3.back * Time.deltaTime);
+        if (transform.position.z >= -10f)
+        {
+            transform.Translate(Vector3.back * Time.deltaTime);
+        }
+        else if (transform.position.z <= -10f)
+        {
+            //Reset position of scrolling background plate
+            Vector3 scrollPosition = new Vector3(0, 0, 10f);
+            transform.position = scrollPosition;
+        }
 
-        //Tried to base the background speed on player speed and this made things very wierd, do not try
-        //var backgroundSpeed = playerShip.playerBasicMovementSpeed;
-        
-        /*
-        if (backgroundSpeed <= 5f)
-        {
-            transform.Translate(Vector3.forward * backgroundSpeed * Time.deltaTime);
-        }
-        else if (backgroundSpeed >= 10f)
-        {
-            transform.Translate(Vector3.forward * backgroundSpeed * Time.deltaTime);
-        }
-  */
+        //Boundaries for the ship
+
+
 	}
     
-    /*public float scrollPosition
-    {
-        get { return this.transform.position.z; }
-        set { this.transform.position.z = scrollPosition; }
-    }*/
-
 }
 
