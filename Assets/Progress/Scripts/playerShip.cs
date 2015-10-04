@@ -4,8 +4,8 @@ using System.Collections;
 public class playerShip : MonoBehaviour {
 
     //public int playerLives = 1;
-    //Must apply 'static' keyword to get variable to be accessed in other script
-    public static float playerBasicMovementSpeed = 1f;
+    //Must apply 'static' keyword in between the public and float statements to get variable to be accessed in other script
+    public float playerBasicMovementSpeed = 1f;
     public float playerLateralMovementSpeed = 5f;
     public float playerThrusterMovementSpeed = 30f;
     public float playerAirBrakeSpeed = -10f;
@@ -19,16 +19,17 @@ public class playerShip : MonoBehaviour {
 	void Update () {
 
         //Basic Player Movement
+        //Thruster Controls
         if(Input.GetKey(KeyCode.W))
         {
-            //playerBasicMovementSpeed = 15f;
             transform.Translate(Vector3.forward * playerThrusterMovementSpeed * Time.deltaTime);
         }
+        //Air Brakes
         else if (Input.GetKey(KeyCode.S))
         {
-            //playerBasicMovementSpeed = .1f;
             transform.Translate(Vector3.back * playerAirBrakeSpeed * Time.deltaTime);
         }
+        //Lateral Controls
         else if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector3.left * playerLateralMovementSpeed * Time.deltaTime);
@@ -39,14 +40,10 @@ public class playerShip : MonoBehaviour {
         }
         else 
         {
+            //Players default speed when no input is applied
             playerBasicMovementSpeed = 1f;
         }
-        //Lateral Controls
-        //Thruster Controls
-        //Air Brakes
-    
-
-
+        
         //Player Attack
         if (Input.GetKey(KeyCode.Space))
         {
