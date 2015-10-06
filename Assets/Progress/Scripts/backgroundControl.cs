@@ -23,9 +23,6 @@ public class backgroundControl : MonoBehaviour {
             transform.position = scrollPosition;
         }
 
-        //Boundaries for the ship
-
-
 	}
     
 }
