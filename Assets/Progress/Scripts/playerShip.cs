@@ -4,17 +4,7 @@ using System.Collections;
 public class playerShip : MonoBehaviour {
 
     //public int playerLives = 1;
-    //Must apply 'static' keyword in between the public and float statements to get variable to be accessed in other script
-    public float playerBasicMovementSpeed = 1f;
-    public float playerLateralMovementSpeed = 5f;
-    public float playerThrusterMovementSpeed = 30f;
-    public float playerAirBrakeSpeed = -10f;
-
-    //Variable for target objects to allow angled player movement
-    public Transform forwardLeftTarget;
-    public Transform forwardRightTarget;
-    public Transform backLeftTarget;
-    public Transform backRightTarget;
+    public float playerMovementSpeed = 12.5f;
 
     //Bullet variable for setting prefab to spawn
     public Transform playerShipBullet;
@@ -33,44 +23,19 @@ public class playerShip : MonoBehaviour {
             //Spawns the bullet that is attached to the first statement and at the position and rotation of the second statement (need to figure out how to correct the position)
             Instantiate(playerShipBullet, transform.position, transform.rotation);
         }
-
         //Basic Player Movement
-        //Angle Controls for the ship movement using other actors in the scene(this may not be the most optimal way to do this but it works pretty good right now)
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W)) 
-        {
-            transform.position = Vector3.MoveTowards(transform.position, forwardLeftTarget.position, playerLateralMovementSpeed * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.W))
-        {
-            transform.position = Vector3.MoveTowards(transform.position, forwardRightTarget.position, playerLateralMovementSpeed * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
-        {
-            transform.position = Vector3.MoveTowards(transform.position, backLeftTarget.position, playerLateralMovementSpeed * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
-        {
-            transform.position = Vector3.MoveTowards(transform.position, backRightTarget.position, playerLateralMovementSpeed * Time.deltaTime);
-        }
+        float leftright = Input.GetAxis("Horizontal");
+        float updown = Input.GetAxis("Vertical");
+
+        transform.Translate((Vector3.right * leftright + Vector3.forward * updown) * Time.deltaTime * playerMovementSpeed, Space.World);
+      
+        /*Vector3 movement = Vector3.zero;
         //Thruster Controls
-        else if(Input.GetKey(KeyCode.W))
+        if(Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector3.forward * playerThrusterMovementSpeed * Time.deltaTime);
+            movement += Vector3.forward;
         }
-        //Air Brakes
-        else if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back * playerAirBrakeSpeed * Time.deltaTime);
-        }
-        //Lateral Controls
-        else if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(Vector3.left * playerLateralMovementSpeed * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(Vector3.right * playerLateralMovementSpeed * Time.deltaTime);
-        }
+        transform.Translate(movement * playerLateralMovementSpeed * Time.deltaTime);*/
       
         //Player Hit Detection
 
