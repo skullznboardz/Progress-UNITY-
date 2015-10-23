@@ -9,6 +9,8 @@ public class playerShip : MonoBehaviour {
     //Bullet variable for setting prefab to spawn
     public Transform playerShipBullet;
 
+    public float playerHealth = 100;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -72,6 +74,18 @@ public class playerShip : MonoBehaviour {
             Vector3 rightWall = transform.position;
             rightWall.x = -4f;
             transform.position = rightWall;
+        }
+
+        //Lose condition
+        if(playerHealth <= 0)
+        {
+            playerHealth = 0;
+            Destroy(gameObject);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Debug.Log("Current Player Health is " + playerHealth);
         }
 	}
 }

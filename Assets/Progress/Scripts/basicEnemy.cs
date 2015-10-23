@@ -14,6 +14,8 @@ public class basicEnemy : MonoBehaviour {
     //Limiting Enemny Fire Rate
     public float EnemyFire = 0;
 
+    public float enemyHealth = 10;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -42,6 +44,23 @@ public class basicEnemy : MonoBehaviour {
             EnemyFire++;
             //Debug.Log(EnemyFire);
         }
+
+        if (enemyHealth <= 0)
+        {         
+            enemyHealth = 0;
+            basicEnemyAI.numberOfEnemies = basicEnemyAI.numberOfEnemies - 1;
+
+            Destroy(gameObject);
+        }
 	}
 
+    void OnCollisionEnter(Collision playerBullet)
+    {
+        //Detects that if the collider called out aboce is in layer 8
+        if (playerBullet.gameObject.layer == 10)
+        {
+            Debug.Log("EnemyHit");
+            //Destroy(gameObject);
+        }
+    }
 }
