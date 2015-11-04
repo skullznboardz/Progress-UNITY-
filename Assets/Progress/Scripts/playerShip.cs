@@ -11,19 +11,14 @@ public class playerShip : MonoBehaviour {
 
     public float playerHealth = 100;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
 
         //Player Attack
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Fire1"))
         {
-            //Spawns the bullet that is attached to the first statement and at the position and rotation of the second statement (need to figure out how to correct the position)
-            Instantiate(playerShipBullet, transform.position, transform.rotation);
+            GameObject playerAttackBasic = Instantiate(playerShipBullet, transform.position, transform.rotation) as GameObject;
+            //playerAttackBasic.transform.parent = transform;
         }
         //Basic Player Movement
         float leftright = Input.GetAxis("Horizontal");
@@ -87,5 +82,12 @@ public class playerShip : MonoBehaviour {
         {
             Debug.Log("Current Player Health is " + playerHealth);
         }
+
+
 	}
+
+    void OnCollisionEnter(Collision otherCollision)
+    {
+        Debug.Log("player ship hit by " + otherCollision.gameObject.transform.name);
+    }
 }

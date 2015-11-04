@@ -6,11 +6,6 @@ public class playerAttack : MonoBehaviour {
     public float basicBulletSpeed = 15f;
 
     private float enemyHealthCheck;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
 	void Update () {

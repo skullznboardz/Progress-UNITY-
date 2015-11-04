@@ -15,11 +15,6 @@ public class basicEnemy : MonoBehaviour {
     public float EnemyFire = 0;
 
     public float enemyHealth = 10;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,7 +24,7 @@ public class basicEnemy : MonoBehaviour {
         if(transform.position.z <= -10)
         {
             Destroy(gameObject, 0f);
-            basicEnemyAI.numberOfEnemies = basicEnemyAI.numberOfEnemies - 1;
+            basicEnemyAI.numberOfBasicShips -= 1;
         }
        
         //Converts RaycastHit to the variable hit to be used in the hit raycast hitdetection 
@@ -38,9 +33,10 @@ public class basicEnemy : MonoBehaviour {
         //If, when casting a ray out from the ships positions in the direction its facing, forward, it hits at infinite distance the player layer then execute command
         if (Physics.Raycast(transform.position, transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, game.Instance.PlayerLayerMask) && EnemyFire < 1)
         {
-            //Spawns the bullet that is attached to the variable enemyShipBullet and at the position and rotation of the second statement (need to figure out how to correct the position)
+            //Spawns the bullet that is attached to the variable enemyShipBullet and at the position and rotation of the second statement
             GameObject enemyBullet = Instantiate(enemyShipBullet, transform.position, transform.rotation) as GameObject;
             enemyBullet.transform.parent = transform;
+            //Instantiate(enemyShipBullet, transform.position, transform.rotation);
             EnemyFire++;
             //Debug.Log(EnemyFire);
         }
@@ -48,7 +44,7 @@ public class basicEnemy : MonoBehaviour {
         if (enemyHealth <= 0)
         {         
             enemyHealth = 0;
-            basicEnemyAI.numberOfEnemies = basicEnemyAI.numberOfEnemies - 1;
+            basicEnemyAI.numberOfBasicShips -= 1;
 
             Destroy(gameObject);
         }
